@@ -1,3 +1,10 @@
+<?php
+  if(isset($_POST['login'])){
+    header("location:login_process.php");
+  }
+?>
+
+
 <!doctype html>
 <html lang="th">
   <head>
@@ -24,12 +31,12 @@
 
         <!-- Login Form Begin -->
         <div class="form-floating" >
-        <input type="text" class="form-control" id="floatingInput" placeholder="Username">
+        <input type="text" class="form-control" id="floatingInput" placeholder="Username" name="User_ID">
         <label for="floatingInput">Username</label>
         </div>
         <br>
         <div class="form-floating">
-        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+        <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="User_Pass">
         <label for="floatingPassword">Password</label>
         </div>
         <!-- Login Form End -->
@@ -38,7 +45,7 @@
         <div class="h6 mb-3 fw-normal" style="text-align: right;"><a href="">สมัครสมาชิก</a></div>
 
         <!-- Login Buttom -->
-        <button class="w-100 btn btn-lg btn-primary lgn-btn" type="submit" action="login_process.php" ><b>เข้าสู่ระบบ</b></button>
+        <button class="w-100 btn btn-lg btn-primary lgn-btn" type="submit" name="login" ><b>เข้าสู่ระบบ</b></button>
         
         </form>
     </main>
