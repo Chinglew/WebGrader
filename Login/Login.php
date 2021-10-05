@@ -23,7 +23,7 @@
     
 
         <!-- Login Form Begin -->
-        <div class="form-floating">
+        <div class="form-floating" action="login_process.php">
         <input type="text" class="form-control" id="floatingInput" placeholder="Username">
         <label for="floatingInput">Username</label>
         </div>
@@ -38,7 +38,7 @@
         <div class="h6 mb-3 fw-normal" style="text-align: right;"><a href="">สมัครสมาชิก</a></div>
 
         <!-- Login Buttom -->
-        <button class="w-100 btn btn-lg btn-primary lgn-btn" type="submit"><b>เข้าสู่ระบบ</b></button>
+        <button class="w-100 btn btn-lg btn-primary lgn-btn" type="submit" ><b>เข้าสู่ระบบ</b></button>
         
         </form>
     </main>
