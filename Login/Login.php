@@ -1,10 +1,3 @@
-<?php
-  if(isset($_POST['login'])){
-    header("location:login_process.php");
-  }
-?>
-
-
 <!doctype html>
 <html lang="th">
   <head>
@@ -24,7 +17,7 @@
   <body class="text-center">
     
     <main class="form-signin">
-        <form>
+        <form action = "login_process.php" method="POST">
         <!-- Image Logo -->
         <img class="mb-2" src="../Pic/Login-Logo.png" alt="" width="100%" height="100%" >
     

@@ -1,5 +1,5 @@
 <?php
-session_start();
+session_start();   
 	$con = mysqli_connect("localhost","root","","grader");
 	$uid = $_POST['User_ID'];
 	$pwd = $_POST['User_Pass'];
@@ -8,14 +8,15 @@ session_start();
 
 	$sqlq = mysqli_query($con,$sql);
 	$sqlq2 = mysqli_query($con,$sql2);
-	$result = mysqli_fetch_array($sqlq2);
 	if (mysqli_num_rows($sqlq)==1) {
-		
-		header("location:index.php");
-
+        $_SESSION["User_ID"] = $result["User_ID"];
+		$_SESSION["User_Name"] = $result['User_Name'];
+		$_SESSION["User_Surname"] = $result['User_Surname'];
+		$_SESSION["User_Status"] = $result['"User_Status'];
+        header("location:test.php");
 	}else{
-		echo "ควย";
-		session_destroy();
+        echo "<script>alert('ชื่อผู้ใช้/รหัสผ่านผิด')</script>";
+		header("location:Login.php");
+        session_destroy();
 	}
-
 ?>
