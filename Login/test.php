@@ -1,11 +1,18 @@
 <?php
 session_start();
-    echo "Hello";
-    if($_SESSION["User_ID"]!="0"){
-        echo $_SESSION["User_ID"];
-        log($_SESSION["User_ID"]);
-    }
 ?>
 <html>
-
+    <body>
+        test
+    </body>
 </html>
+
+
+<?php
+if(isset($_SESSION["User_ID"])){
+    echo "lololololololo";
+}
+    
+?>
+
+
