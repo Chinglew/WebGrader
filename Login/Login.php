@@ -1,3 +1,14 @@
+<?php
+ob_start();
+session_start(); 
+ if($_SESSION!=NULL){
+  header("location:test.php");
+ }
+
+
+
+?>
+
 <!doctype html>
 <html lang="th">
   <head>
