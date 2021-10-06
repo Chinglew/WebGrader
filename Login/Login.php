@@ -2,11 +2,8 @@
 ob_start();
 session_start(); 
  if($_SESSION!=NULL){
-  header("location:test.php");
+  header("location:../Home.php");
  }
-
-
-
 ?>
 
 <!doctype html>
