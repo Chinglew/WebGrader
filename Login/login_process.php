@@ -1,4 +1,5 @@
 <?php
+include ("connect.php");
 ob_start();
 session_start();   
 	$con = mysqli_connect("localhost","root","","grader");
@@ -10,6 +11,7 @@ session_start();
 	if (mysqli_num_rows($sqlq2)==1) {
         $_SESSION["User_ID"] = $result["User_ID"];
 		$_SESSION["User_Password"] = $result["User_Password"];
+		$_SESSION["User_Username"] = $result["User_Username"];
 		$_SESSION["User_Name"] = $result['User_Name'];
 		$_SESSION["User_Surname"] = $result['User_Surname'];
 		$_SESSION["Email"] = $result['Email'];
@@ -18,7 +20,8 @@ session_start();
 
         header("location:../Home.php");
 	}else{
-		header("location:Login.php");
+		$_POST['Error'] = TRUE;
+		header("location:Login_error.php");
         session_destroy();
 	}
 ?>

@@ -5,7 +5,6 @@ if($_SESSION!=NULL){
   header("location:../../WebGrader/Home.php");
  }
 ?>
-
 <!doctype html>
 <html lang="th">
   <head>
@@ -23,6 +22,7 @@ if($_SESSION!=NULL){
 
   </head>
   <body class="text-center">
+  <script>alert("ชื่อผู้ใช้หรือรหัสผ่านผิด");</script>
     
     <main class="form-signin">
         <form action = "login_process.php" method="POST">

@@ -1,7 +1,6 @@
 <?php
-ob_start();
-session_start();   
-	$con = mysqli_connect("localhost","root","","grader");
+    include ("../connect.php");
+    $con = mysqli_connect("localhost","root","","grader");
 	$uid = $_SESSION['User_ID'];
 	$pwd = $_SESSION['User_Password'];
     $uname = $_POST['first_name'];
@@ -40,21 +39,11 @@ session_start();
             $_SESSION["User_Status"] = $result['User_Status'];
             $_SESSION["Course_ID"] = $result['Course_ID'];
 
-        
-
-            header("location:Edit_User.php");
+            header("location:../../WebGrader/Edit_User/EditPfofile.php");
 	    }
 
-
-
-
-
-
-        
-    
-
     }else{
-        header("location:Edit_User.php?=error");
+        header("location:../../WebGrader/Edit_User/EditPfofile.php");
     }
 
 ?>

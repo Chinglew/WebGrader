@@ -2,7 +2,7 @@
     ob_start();
     session_start();
     if($_SESSION==NULL){
-        header("location:../WebGrader/Login/Login.php");
+        header("location:../../WebGrader/Login/Login.php");
     }
 ?>
 <!DOCTYPE html>
