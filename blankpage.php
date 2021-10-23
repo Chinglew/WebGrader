@@ -1,3 +1,9 @@
+<?php
+    include('config.php');
+    if(!isset($_SESSION['Username'])):
+     header("location:../../WebGrader/Login/Login.php");
+    endif
+?>
 <!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
@@ -46,6 +52,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
               
                 <h1 class="m-0"> Page Content </i></h1>
+             
 
 
 
