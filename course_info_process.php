@@ -13,8 +13,8 @@
    if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $Course_Name)){
       array_push($errors, "Course name can not contain special characters");
     $_SESSION['error'] = "Course name code can not contain special characters";
-      header("location:../../WebGrader/Edit_User/EditProfile.php");
-  }
+      header("location:../../WebGrader/Course_Info.php?Course_ID=".$Course_ID."");
+  }else{
 	$Semester = $_POST['Semester'];
 	$Schoolyear = $_POST['Schoolyear'];
 	$start_date = date("Y-m-d",strtotime($_POST['Start_date']));
@@ -36,6 +36,6 @@
    $_SESSION['error'] = "Something is Wrong";
    header("location:../../WebGrader/Course_Info.php?Course_ID=".$Course_ID."");
    }
- 
+}
 ?>
 

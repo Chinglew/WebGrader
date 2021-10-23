@@ -9,8 +9,8 @@ if(isset($_POST['save']))
 	if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $Course_Name)){
         array_push($errors, "Your Course name can not contain special characters");
 		$_SESSION['error'] = "Your Course name can not contain special characters";
-        header("location:../../Classroom/CreateCourse.php");
-    }
+        header("location:../Classroom/CreateCourse.php");
+    }else{
 
 	
 	$Semester = $_POST['Semester'];
@@ -76,6 +76,7 @@ if(isset($_POST['save']))
 		
 		
 		}
+	}
 	mysqli_close($connect);
 
 	}
