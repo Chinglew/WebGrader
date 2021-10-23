@@ -8,6 +8,13 @@
    $errors = [];
    
 	$Course_Name = $_POST['Course_Name'];
+
+
+   if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $Course_Name)){
+      array_push($errors, "Course name can not contain special characters");
+    $_SESSION['error'] = "Course name code can not contain special characters";
+      header("location:../../WebGrader/Edit_User/EditProfile.php");
+  }
 	$Semester = $_POST['Semester'];
 	$Schoolyear = $_POST['Schoolyear'];
 	$start_date = date("Y-m-d",strtotime($_POST['Start_date']));

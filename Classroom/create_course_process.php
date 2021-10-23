@@ -2,9 +2,17 @@
 include('../config.php');
 if(isset($_POST['save']))
 {	 
+	$errors = [];
 	$uid = $_SESSION['User_ID'];
 	$date = explode("-",$_POST['daterange']);
 	$Course_Name = $_POST['Course_Name'];
+	if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $Course_Name)){
+        array_push($errors, "Your Course name can not contain special characters");
+		$_SESSION['error'] = "Your Course name can not contain special characters";
+        header("location:../../Classroom/CreateCourse.php");
+    }
+
+	
 	$Semester = $_POST['Semester'];
 	$Schoolyear = $_POST['Schoolyear'];
 	$start_date = date("Y-m-d",strtotime($date[0]));
@@ -49,18 +57,18 @@ if(isset($_POST['save']))
 			$add = "INSERT INTO course_role (Course_ID, User_ID, Role) VALUES ('.$Class_ID.', '.$uid.', 'Owner')";
 			if (mysqli_query($connect, $add)) {
 				echo "New record created successfully ! <br><br><br>";
-				//header("location:../Class.php");
+				header("location:../Class.php");
 			} else {
 				echo "Error: " . $sql. mysqli_error($connect);
 				array_push($errors, "Something wrong try again later");
 				$_SESSION['error'] = "Something wrong try again later";
-				//header("location:../../Classroom/CreateCourse.php");
+				header("location:../../Classroom/CreateCourse.php");
 			}
 		} else {
 			echo "Error: " . $sql. mysqli_error($connect);
 			array_push($errors, "Something wrong try again later");
 			$_SESSION['error'] = "Something wrong try again later";
-			//header("location:../../Classroom/CreateCourse.php");
+			header("location:../../Classroom/CreateCourse.php");
 
 
 

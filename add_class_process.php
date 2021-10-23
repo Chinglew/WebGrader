@@ -4,6 +4,11 @@ $errors = array();
 
 	$uid = $_SESSION['User_ID'];
     $Addclass_ID = $_POST['Addclass_ID'];
+    if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $Addclass_ID)){
+        array_push($errors, "Enroll code can not contain special characters");
+		$_SESSION['error'] = "Enroll code can not contain special characters";
+        header("location:../../WebGrader/Edit_User/EditProfile.php");
+    }
 
 	echo $uid;
     echo "<br>".$Addclass_ID."<br>";
