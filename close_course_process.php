@@ -6,11 +6,7 @@
    $Course_ID = $_GET['Course_ID'];
    $userid = $_SESSION['User_ID'];
    $errors = [];
-
-   $checkcourserole = mysqli_query($connect,"SELECT Role FROM course_role WHERE User_ID = '$userid' AND Course_ID = '$Course_ID' ");
-   $result = mysqli_fetch_assoc($checkcourserole);
-   $role = $result["Role"];
-   $end_date = date('Y-m-d',strtotime("-1 days"));
+   $yesterday_date = date('Y-m-d',strtotime("-1 days"));
 
 
 
@@ -20,7 +16,7 @@
    $role = $result["Role"];
       if ($role=='Owner'){
          $close_course = "UPDATE course 
-         SET End_date='".$end_date."'
+         SET End_date='".$yesterday_date."'
          WHERE Course_ID='".$Course_ID."'";
          mysqli_query($connect,$close_course) or die(mysqli_error());
          header("location:../../WebGrader/Course.php?Course_ID=".$Course_ID."");

@@ -218,8 +218,12 @@ function confirmation(){
            
             
           <!-- popupมั่นใจไหมว่าจะลบ --><button  type="button" name="del_course" class="btn btn-danger w-10" data-toggle="modal" data-target="#del_course">ลบ</button>
-					<!-- popมั่นใจไหมที่จะปิดคอร์ส --><button  type="button" name="end_course" class="btn btn-secondary w-10" data-toggle="modal" data-target="#end_course">ปิด Course</button>        
-           
+					
+          <?php if($Start_date <= date('Y-m-d') and date('Y-m-d') <= $End_date){ ?>
+          <!-- popมั่นใจไหมที่จะปิดคอร์ส --><button  type="button" name="end_course" class="btn btn-secondary w-10" data-toggle="modal" data-target="#end_course">ปิด Course</button>        
+          <?php } else{?>
+          <!-- popมั่นใจไหมที่จะgปิดคอร์ส --><button  type="button" name="start_course" class="btn btn-success w-10" data-toggle="modal" data-target="#start_course">เปิด Course</button>        
+           <?php } ?>
         
 					<button type="submit" id="submit" name="submit" class="btn btn-warning w-25 float-right ml-2 " data-toggle="modal" data-target="#exampleModal">บันทึก</button> 
           <button  onclick="document.location='Course.php?Course_ID=<?=$Course_ID?>'" type="button"  name="cancel" class="btn btn-dark w-25 float-right ml-2">ยกเลิก</button>
@@ -383,6 +387,29 @@ function confirmation(){
                   <!-- แก้ปุ่มใน modal-->
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                   <button onclick="document.location='close_course_process.php?Course_ID=<?=$Course_ID?>'" type="button" class="btn btn-warning">ยืนยัน</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- moal start course -->
+          <div class="modal fade" id="start_course" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">แจ้งเตือนการปิดห้องเรียน</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <h5>คุณแน่ใจจะเปิด course นี้</h5>
+                </div>
+                <div class="modal-footer">
+                  <!-- แก้ปุ่มใน modal-->
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button onclick="document.location='open_course_process.php?Course_ID=<?=$Course_ID?>'" type="button" class="btn btn-success">ยืนยัน</button>
                 </div>
               </div>
             </div>
