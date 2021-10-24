@@ -13,8 +13,11 @@
                 course.End_Date DESC,
                 course.Start_date ASC,
                 course.Name ASC";
+                // แสดง Course โดยเรียงจากวันที่ปิดท้ายสุดมาก่อน
                 $show_class_q = mysqli_query($connect,$show_class);
-                while($row = mysqli_fetch_array($show_class_q)){
+                $i = 0;
+                while($row = mysqli_fetch_array($show_class_q) AND $i < 4){
+                    $i++;
                     $Course_ID = $row["Course_ID"];
 
                     $show_course = 
@@ -43,8 +46,6 @@
                     $Course_Start_date = $show_course_result['Start_date'];
                     $Course_End_date = $show_course_result['End_date'];
                     $toDay = date('Y-m-d');
-
-                   
                     if($Course_Start_date <= $toDay and $Course_End_date >= $toDay){
                         $course_status = 'Open';
                         $card_Icon ='fas fa-user fa-6x';
@@ -114,5 +115,4 @@
             </div> 
             <?php }?>
             <!-- /.col-sm-6 -->
-
             

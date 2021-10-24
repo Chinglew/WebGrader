@@ -9,39 +9,34 @@ $errors = array();
 	if(empty($uname) || empty($pwd)){
 		array_push($errors, "Username or Password is empty");
 		$_SESSION['error'] = "Username or Password is empty";
-	}elseif (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $uname)){
-        array_push($errors, "Username code can not contain special characters");
-		$_SESSION['error'] = "Username code can not contain special characters";
-        header("location:Login.php");
-    }else{
-		if(count($errors) == 0){
+	}
+	if(count($errors) == 0){
 
-			$sql = "SELECT * FROM user WHERE Username = '".$uname."' and Password = '".$pwd."'";
-			$sqlq2 = mysqli_query($connect,$sql);
-			$result = mysqli_fetch_array($sqlq2);
-			if (mysqli_num_rows($sqlq2)==1) {
-				echo $result["User_ID"];
-				$_SESSION["User_ID"] = $result["User_ID"];
-				$_SESSION["Username"] = $result["Username"];
-				$_SESSION["Is_admin"] = $result["Is_admin"];
+		$sql = "SELECT * FROM user WHERE Username = '".$uname."' and Password = '".$pwd."'";
+		$sqlq2 = mysqli_query($connect,$sql);
+		$result = mysqli_fetch_array($sqlq2);
+		if (mysqli_num_rows($sqlq2)==1) {
+			echo $result["User_ID"];
+			$_SESSION["User_ID"] = $result["User_ID"];
+			$_SESSION["Username"] = $result["Username"];
+			$_SESSION["Is_admin"] = $result["Is_admin"];
 
-				if($_SESSION["Is_admin"]){
-					header("location:../Home_Admin.php");
-				}else{
-					header("location:../Home.php");
-				}
-
-				
+			if($_SESSION["Is_admin"]){
+				header("location:/WebGrader/Home_admin.php");
 			}else{
-				array_push($errors, "Username or Password is wrong");
-				$_SESSION['error'] = "Username or Password is wrong";
-				header("location:Login.php");
-
+				header("location:/WebGrader/Home.php");
 			}
+
+			
 		}else{
-			array_push($errors, "Username or Password is empty");
-			$_SESSION['error'] = "Username or Password is empty";
+			array_push($errors, "Username or Password is wrong");
+			$_SESSION['error'] = "Username or Password is wrong";
 			header("location:Login.php");
+
 		}
+	}else{
+		array_push($errors, "Username or Password is empty");
+		$_SESSION['error'] = "Username or Password is empty";
+		header("location:Login.php");
 	}
 ?>

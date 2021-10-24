@@ -4,11 +4,6 @@ $errors = array();
 
 	$uid = $_SESSION['User_ID'];
     $Addclass_ID = $_POST['Addclass_ID'];
-    if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $Addclass_ID)){
-        array_push($errors, "Enroll code can not contain special characters");
-		$_SESSION['error'] = "Enroll code can not contain special characters";
-        header("location:AddClass.php");
-    }else{
 
 	echo $uid;
     echo "<br>".$Addclass_ID."<br>";
@@ -41,7 +36,7 @@ $errors = array();
                 mysqli_query($connect,$add);
                 header("location:Class.php");
             }
-		
+		//บัคเรื่องโค้ดที่ใส่ในการเข้า class ผิด
 
         }else{
             array_push($errors, "You are already in this class");
@@ -55,6 +50,6 @@ $errors = array();
             header("location:AddClass.php");
 
         }
-    }   
+        
 		
 ?>

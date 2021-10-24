@@ -1,7 +1,7 @@
 <?php
     include('config.php');
     if(!isset($_SESSION['Username'])):
-     header("location:../../WebGrader/Login/Login.php");
+     header("location:/WebGrader/Login/Login.php");
     endif;
     $Course_ID = $_GET['Course_ID'];
     $userid = $_SESSION['User_ID'];
@@ -30,6 +30,7 @@ This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
 <html lang="th">
+<title>WebGrader | ห้องเรียน</title>
 <style>
       .container{
         font-family: 'Kanit', sans-serif;
@@ -96,7 +97,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <div class="row mb-2" style="text-decoration: underline; text-decoration-color: #FF8540;-webkit-text-decoration-color:#FF8540;text-decoration-thickness: 4px;">
           <div class="col mt-2" >
     
-            <h1 class="m-0 fw-bolder">ห้องเรียน<?php echo $Course_Name; ?><i class="fa fa-book ml-2"></i></i></h1>
+            <h1 class="m-0 fw-bolder">ห้องเรียน : <?php echo $Course_Name; ?><i class="fa fa-book ml-2"></i></i></h1>
 
           </div><!-- /.col -->         
         </div><!-- /.row -->
@@ -246,176 +247,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
 <br>
-<div class="row">
-        <!-- **********************************\*Use this for generate with PHP******************************************-->
-          <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="card cardborder" style="background-color:#FFFFFF;border-top-left-radius: 15px;border-top-right-radius: 15px;border-bottom-left-radius: 15px;border-bottom-right-radius: 15px;">
-                <a href="blankpage.php" class ="cardlink"> <!-- Link Here -->
-                <div class="card-body" >
-                
-                    <h5 class="card-title"><b><?php echo "Python Class" ?></b></h5> <!-- Class Name -->
 
-                    <p class="card-text">
-                        <div class="row">
-                            <div class="col" style="text-align:center;">
-                                <i class="fas fa-check fa-6x"></i>  <!-- Icon -->
-
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col" style="text-align:center;">
-                                <h5><?php echo "Passed" ?></h5>  <!-- Status -->
-                            
-                            </div>
-                        </div>               
-                    </p>
-
-                    <h6>- <?php echo "Assignment 1" ?></h6> <!-- Assignment -->
-              
-              </div>
-              </a>
-            </div>
-            <!-- /.card -->
-          <!-- **********************************************************************************************************-->  
-          </div>
-          <!-- /.col-sm-6 -->
-          <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="card" style="border-top-left-radius: 15px;border-top-right-radius: 15px;border-bottom-left-radius: 15px;border-bottom-right-radius: 15px;">
-                <div class="card-body">
-                    <h5 class="card-title"><b><?php echo "Python Class" ?></b></h5> <!-- Class Name -->
-
-                    <p class="card-text">
-                        <div class="row">
-                            <div class="col" style="text-align:center;">
-                                <i class="fas fa-search fa-6x"></i>  <!-- Icon -->
-
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col" style="text-align:center;">
-                                <h5><?php echo "waiting for inspect" ?></h5>  <!-- Status -->
-                            
-                            </div>
-                        </div>               
-                    </p>
-
-                    <a href="#" class="card-link">- <?php echo "Assingment 2" ?></a> <!-- Assignment -->
-                </div>
-            </div>
-            <!-- /.card -->     
-          </div>
-          <!-- /.col-sm-6 -->
-          <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="card" style="border-top-left-radius: 15px;border-top-right-radius: 15px;border-bottom-left-radius: 15px;border-bottom-right-radius: 15px;">
-                <div class="card-body">
-                    <h5 class="card-title"><b><?php echo "Python Class" ?></b></h5> <!-- Class Name -->
-
-                    <p class="card-text">
-                        <div class="row">
-                            <div class="col" style="text-align:center;">
-                                <i class="fas fa-history fa-6x"></i>  <!-- Icon -->
-
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col" style="text-align:center;">
-                                <h5><?php echo "waiting for turn in" ?></h5>  <!-- Status -->
-                            
-                            </div>
-                        </div>               
-                    </p>
-
-                    <a href="#" class="card-link">- <?php echo "Assingment 3" ?></a> <!-- Assignment -->
-                </div>
-            </div>
-            <!-- /.card -->     
-          </div>
-          <!-- /.col-sm-6 -->
-          <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="card" style="border-top-left-radius: 15px;border-top-right-radius: 15px;border-bottom-left-radius: 15px;border-bottom-right-radius: 15px;">
-                <div class="card-body">
-                    <h5 class="card-title"><b><?php echo "Java Class" ?></b></h5> <!-- Class Name -->
-                    
-                    <p class="card-text">
-                        <div class="row">
-                            <div class="col" style="text-align:center;">
-                                <i class="fas fa-times-circle fa-6x"></i>  <!-- Icon -->
-
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col" style="text-align:center;">
-                                <h5><?php echo "Not Passed" ?></h5>  <!-- Status -->
-                            
-                            </div>
-                        </div>               
-                    </p>
-
-                    <a href="#" class="card-link">- <?php echo "Assignment 2" ?></a> <!-- Assingment -->
-                </div>
-            </div>
-            <!-- /.card -->     
-          </div>
-          <!-- /.col-sm-6 -->
-          <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="card" style="border-top-left-radius: 15px;border-top-right-radius: 15px;border-bottom-left-radius: 15px;border-bottom-right-radius: 15px;">
-                <div class="card-body">
-                    <h5 class="card-title"><b><?php echo "Java Class" ?></b></h5> <!-- Class name -->
-
-                    <p class="card-text">
-                        <div class="row">
-                            <div class="col" style="text-align:center;">
-                                <i class="fas fa-calendar-times fa-6x"></i>  <!-- Icon -->
-
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col" style="text-align:center;">
-                                <h5><?php echo "Not turn in" ?></h5>  <!-- Status -->
-                            
-                            </div>
-                        </div>               
-                    </p>
-
-                    <a href="#" class="card-link">- <?php echo "Assingment 1" ?></a> <!-- Assingment -->
-                </div>
-            </div>
-            <!-- /.card -->     
-          </div>
-          <!-- /.col-sm-6 -->
-          <?php if ($role == "Teacher" || $role == "Owner"){?>          
-          <div class="col-sm-6 col-md-4 col-lg-3 mt-2 pt-3">
-            <div class="card" style="border-top-left-radius: 15px;border-top-right-radius: 15px;border-bottom-left-radius: 15px;border-bottom-right-radius: 15px;border-bottom-width: 20px;border-bottom-color: #FEC352;">
-            <a href="#" id="add_class"> 
-                <div class="card-body">
-                    <p class="card-text">
-                            <div class="row">
-                                <div class="col style="text-align:center;">
-                                <h1><i class="gg-add-r"></i></h1>  <!-- Icon -->
-                                </div>
-                            </div>
-                    </p>
-                 <div class="row">
-                        <div class="col" style="text-align:left;">
-                            <h4>เพิ่ม Assignment</h4>  <!-- Class Name -->
-                        
-                        </div>
-                    </div>
-                    
-        
-                </div>
-            </a>
-            </div>
-            <!-- /.card -->     
-          </div>
-          <?php } ?>
-
-        </div>
-
-            </div>
-            <!-- /.col -->
-        </div>
-        <!-- /.row -->  
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->

@@ -1,3 +1,9 @@
+<?php
+    include('config.php');
+    if(!isset($_SESSION['Username'])):
+     header("location:Login/Login.php");
+    endif
+?>
 <!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
@@ -7,7 +13,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Add Assignment</title>
+  <title>WebGrader | หน้าสั่งงาน</title>
 
   <style>
       .container{
@@ -132,7 +138,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <div class="row">
                             <div class="col">
                                 <div class="form-group" id="TestCase_Form">
-                                        <label class="badge bg-warning" for="Test1_input">TestCase1</label>
+                                        <label class="badge bg-warning" for="Test1_input">TestCase 1</label>
                                         
                                     <div class="row" id="Testcase1">
                                         <div class="col-md-12 col-sm-12">    
@@ -148,8 +154,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <!-- Add Button -->
                         <div class="row">
                             <div class="col">
+                                
                                 <div class="text-right">
-                                    <button onclick="CreateTastCase()" type="button" id="AddTestCase" name="AddTestCase" class="btn btn-warning" style="border-top-left-radius: 20px;border-top-right-radius: 20px;border-bottom-left-radius: 20px;border-bottom-right-radius: 20px;">+</button>
+                                    <button onclick="CreateHidden()" type="button" id="AddTestCase" name="AddHiddenCase" class="btn btn-secondary" style="border-top-left-radius: 20px;border-top-right-radius: 20px;border-bottom-left-radius: 20px;border-bottom-right-radius: 20px;">เพิ่ม Hidden Case</button>
+                                    <button onclick="CreateTastCase()" type="button" id="AddTestCase" name="AddTestCase" class="btn btn-warning" style="border-top-left-radius: 20px;border-top-right-radius: 20px;border-bottom-left-radius: 20px;border-bottom-right-radius: 20px;">เพิ่ม Test Case</button>
                                 </div>
                             </div>
                             
@@ -198,7 +206,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </div>
 
 <!-- REQUIRED SCRIPTS -->
-
+    
 
 
 <!-- jQuery -->
@@ -210,6 +218,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <script>
     var count = 2;
+    var count2 = 1;
 function CreateTastCase() {
    
     if(count <=5){
@@ -218,7 +227,7 @@ function CreateTastCase() {
         CreateLabel.setAttribute("for","Testcase"+ count +"_input");
         CreateLabel.setAttribute("class","badge bg-warning");
         CreateLabel.setAttribute("style","margin-top:10px;");
-        CreateLabel.innerHTML="TestCase"+count;
+        CreateLabel.innerHTML="TestCase "+count;
         
         // Create Row
         var CreateRow = document.createElement("div");
@@ -250,6 +259,48 @@ function CreateTastCase() {
   
 
   
+}
+
+function CreateHidden() {
+   
+   if(count2 <=5){
+       //Create Label 
+       var CreateLabel = document.createElement("label");
+       CreateLabel.setAttribute("for","HiddenTest"+ count2 +"_input");
+       CreateLabel.setAttribute("class","badge bg-light");
+       CreateLabel.setAttribute("style","margin-top:10px;");
+       CreateLabel.innerHTML="Hidden Test "+ count2;
+       
+       // Create Row
+       var CreateRow = document.createElement("div");
+           CreateRow.setAttribute("class","row");
+           CreateRow.setAttribute("id","HiddenTest"+count2);
+       // Create Column
+       var CreateCol1 = document.createElement("div");
+           CreateCol1.setAttribute("class","col-md-12 col-sm-12");
+       // Create TestCase Input    
+       var CreateTestInput = document.createElement("textarea");
+           CreateTestInput.setAttribute("class","form-control");
+           CreateTestInput.setAttribute("id","HiddenTest"+count2+"_Input");
+           CreateTestInput.setAttribute("Name","HiddenTest"+count2+"_Input");
+           CreateTestInput.setAttribute("rows","5");
+           CreateTestInput.setAttribute("placeholder","Input");
+
+
+       ++count2;
+       // Append Column To Row
+       CreateRow.appendChild(CreateCol1);
+       
+       // Append Textarea To Col
+       CreateCol1.appendChild(CreateTestInput);  
+     
+       document.getElementById("TestCase_Form").appendChild(CreateLabel);
+       document.getElementById("TestCase_Form").appendChild(CreateRow);
+       
+   }
+ 
+
+ 
 }
 
 

@@ -110,20 +110,25 @@ function confirmation(){
               <thead>
                 <tr>
                   <th class="tg-0lax">No.</th>
-                  <th class="tg-0lax">User Name</th>
+                  <th class="tg-0lax">Course_ID</th>
                   <th class="tg-0lax">Name</th>
-                  <th class="tg-0lax">Surname</th>
-                  <th class="tg-0lax">Email</th>          
-                  <th class="tg-0lax">Is_admin</th>
-                  <th class="tg-0lax">แก้ไข</th>
-                  <th class="tg-0lax">ลบข้อมูล</th>
+                  <th class="tg-0lax">Enroll_Code</th>
+                  <th class="tg-0lax">End_date</th>          
+                  <th class="tg-0lax">Schoolyear</th>          
+                  <th class="tg-0lax">Semester</th>
+                  <th class="tg-0lax">Owner_ID</th>
+                  <th class="tg-0lax"></th>
+                  <th class="tg-0lax"></th>
                 </tr>
               </thead>
               <tbody>
               <?php
-                $show_users = "SELECT Username , Firstname ,Surname ,User_ID ,Email, Is_admin 
-                FROM user
-                ORDER BY Is_admin DESC, User.User_ID ASC";
+  
+  
+                $show_users = "SELECT DISTINCT course.Course_ID , course.Name, course.Enroll_Code, course.End_date, course.Schoolyear, course.Semester , course_role.User_ID
+                FROM course
+                INNER JOIN course_role ON course_role.Role = 'Owner'
+                ORDER BY course.Course_ID ASC";
                 $show_users_q = mysqli_query($connect,$show_users);
                 $i=0;
                 while($row = mysqli_fetch_array($show_users_q)){
@@ -131,16 +136,13 @@ function confirmation(){
                 ?>
                 <tr>
                 <td class="tg-0lax"><?php echo $i?></td>
-                  <td class="tg-0lax"><?php echo $row['Username'] ?></td>
-                  <td class="tg-0lax"><?php echo $row['Firstname'] ?></td>
-                  <td class="tg-0lax"><?php echo $row['Surname'] ?></td>
-                  <td class="tg-0lax"><?php echo $row['Email'] ?></td>
-                  <td class="tg-0lax"><?php 
-                  if($row['Is_admin']== 1 ){
-                    echo "ผู้ดูแลระบบ";
-                  }else{
-                    echo "ผู้ใช้ทั่วไป";
-                  }?></td>
+                  <td class="tg-0lax"><?php echo $row['Course_ID'] ?></td>
+                  <td class="tg-0lax"><?php echo $row['Name'] ?></td>
+                  <td class="tg-0lax"><?php echo $row['End_date'] ?></td>
+                  <td class="tg-0lax"><?php echo $row['Enroll_Code'] ?></td>
+                  <td class="tg-0lax"><?php echo $row['Schoolyear'] ?></td>
+                  <td class="tg-0lax"><?php echo $row['Semester'] ?></td>
+                  <td class="tg-0lax"><?php echo $row['User_ID'] ?></td>
                   
                   <td class="tg-0lax">Edit</td>
                   <th class="tg-0lax">

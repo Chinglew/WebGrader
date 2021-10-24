@@ -1,6 +1,6 @@
 <?php
-    include('../config.php');
-    if(($_SESSION['Username'])==NULL):
+    include('../connect.php');
+    if(($_SESSION['User_Username'])==NULL):
      header("location:/WebGrader/Login/Login.php");
     endif
 ?>
@@ -13,7 +13,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>WebGrader | แก้ไขข้อมูลส่วนตัว</title>
+  <title>Edit Profile</title>
 
   <style>
       .container{
@@ -56,14 +56,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </head>
 
 <body class="hold-transition layout-top-nav " >
-<script>
-function confirmation(){
-    var result = confirm("Are you sure to Edit?");
-    return result;
-}
-</script>
-
-
 <div class="wrapper">
 
   <!-- Navbar -->
@@ -87,52 +79,35 @@ function confirmation(){
 				<h1 class="mb-2 text-dark">การตั้งค่า</h1>
 			</div>
 
-
-
-      <?php
-                 $uid = $_SESSION["User_ID"];
-                 $show_user_info = "SELECT * FROM user WHERE User_ID='".$uid."' ";
-                 $show_user_info_q = mysqli_query($connect,$show_user_info);
-                 $result = mysqli_fetch_array($show_user_info_q);
-                 if (mysqli_num_rows($show_user_info_q)!=0) {
-                    $u_Name = $result["Firstname"];
-                    $u_Sname = $result["Surname"];
-                    $u_Email = $result["Email"]; 
-                 }else{ 
-                    
-                 }
-                  
-      ?>
-
             
 			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 m-2">
-			<form action="edit_user_process.php" method="POST"  onsubmit="return confirmation()"> <!-- ใส่ตรงนี้ -->	
+			<form action="edit_user_process.php" method="POST"> <!-- ใส่ตรงนี้ -->	
       <div class="form-group" >
-					<label class="badge bg-warning"> <h4 class="m-2">รหัสนักศึกษา <?php echo $_SESSION["Username"] ?></h4></label>
+					<label class="badge bg-warning"> <h4 class="m-2">รหัสนักศึกษา <?php echo $_SESSION["User_Username"] ?></h4></label>
 				</div>
 
                 <div class="form-group">
 					<label for="fullName">ชื่อ</label>
-					<input type="text" class="form-control" id="fname" name="fname" value="<?php echo $u_Name; ?> ">
+					<input type="text" class="form-control" id="first_name" name="first_name" value="<?php echo $_SESSION["User_Name"] ?> ">
 				</div>
 
         <div class="form-group">
 					<label for="fullName">นามสกุล</label>
-					<input type="text" class="form-control" id="sname" name="sname" value="<?php echo $u_Sname; ?> ">
+					<input type="text" class="form-control" id="last_name" name="last_name" value="<?php echo $_SESSION["User_Surname"] ?> ">
 				</div>
         
 
                 <div class="form-group">
 					<label for="eMail">อีเมล</label>
-					<input type="email" class="form-control" id="email" name="email" value="<?php echo $u_Email; ?>">
+					<input type="email" class="form-control" id="email" name="email" value="<?php echo $_SESSION["Email"] ?>">
 				</div>
 
         <div class="form-group">
 					<label for="changepassword">รหัสผ่านผู้ใช้งาน</label>
 
 					<input type="password" class="form-control mb-3" id="pass"  name="pass"placeholder="กรอกรหัสผ่านเดิม">
-          <input type="password" class="form-control mb-3" id="pass_new"  name="pass_new"placeholder="รหัสผ่านใหม่">
-          <input type="password" class="form-control " id="pass_chk" name="pass_chk" placeholder="ยืนยันรหัสผ่านใหม่">
+                    <input type="password" class="form-control mb-3" id="pass_new"  name="pass_chk"placeholder="รหัสผ่านใหม่">
+          
         </div>
 
 			
@@ -141,7 +116,7 @@ function confirmation(){
 		</div>
 		<?php include('../error.php'); ?>
         <?php if(isset($_SESSION['error'])) :?>
-          <div style="color:red">
+          <div>
             <h5>
               <?php
                 echo $_SESSION['error'];
@@ -156,9 +131,9 @@ function confirmation(){
 		<div class="row gutters">
 			<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 				<div class="text-right">
-					<button  onclick="document.location='../Home.php'" type="button" id="submit" name="submit" class="btn btn-dark w-25">ยกเลิก</button>
-					<button type="submit" id="submit" name="submit" class="btn btn-warning w-25" 
-          data-toggle="modal" data-target="#exampleModal">บันทึก</button> 
+					<button  onclick="document.location='Home.php'" type="button" id="submit" name="submit" class="btn btn-dark w-25">ยกเลิก</button>
+          <!-- แก้ตรง formaction -->
+					<button type="submit" id="submit" name="submit" class="btn btn-warning w-25" data-toggle="modal" data-target="#exampleModal">บันทึก</button> 
           
     
 				</div>

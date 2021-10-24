@@ -1,12 +1,11 @@
 <?php
     include('config.php');
     if(!isset($_SESSION['Username'])):
-     header("location:../../WebGrader/Login/Login.php");
+     header("location:/WebGrader/Login/Login.php");
     endif;
     $Course_ID = $_GET['Course_ID'];
     $userid = $_SESSION['User_ID'];
-    $checkcourserole = mysqli_query($connect,"SELECT Role FROM course_role WHERE User_ID = '$userid' ");
-    //echo $checkcourserole["Role"];
+    $checkcourserole = mysqli_query($connect,"SELECT Role FROM course_role WHERE User_ID = '$userid' AND Course_ID = '$Course_ID' ");
     $result = mysqli_fetch_assoc($checkcourserole);
     $role = $result["Role"];
 
@@ -37,7 +36,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Edit Profile</title>
+  <title>WebGrader | ข้อมูลห้องเรียน</title>
 
   <style>
       .container{
@@ -116,9 +115,16 @@ function confirmation(){
 	<div class="card-body border border-dark">
 		<div class="row gutters">
 			<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                <?php if ($role=="Owner"){ ?>
-				<h1 class="mb-2 text-dark">การตั้งค่าห้องเรียน</h1>
+        <div class="row mb-2" style="text-decoration: underline; text-decoration-color: #FF8540;-webkit-text-decoration-color:#FF8540;text-decoration-thickness: 4px;">
+          <div class="col mt-2">
+    
+            <?php if ($role=="Owner"){ ?>
+        <h1 class="mb-2 text-dark">การตั้งค่าห้องเรียน<i class="fa fa-book ml-2"></i></h1>
+
+          </div><!-- /.col -->         
+        </div>
 			</div>
+
 
 
 
@@ -144,10 +150,21 @@ function confirmation(){
 					<label class="badge bg-warning"> <h4 class="m-2"> ห้องเรียน <?php echo $Course_Name ?></h4></label>
 				</div>
 
-                <div class="form-group">
-					<label>Enroll_Code</label>
-					<label><h1><?php echo $Enroll_Code; ?></h1></label>
-				</div>
+        <div class="form-group">
+          <label>Enroll_Code : </label>
+          <label class="badge bg-warning" id="copyenrollcode" ><h1><?php echo $Enroll_Code; ?></h1></label>
+           
+
+            <script>
+              copyenrollcode.onclick = function () {
+              /* Copy the text inside the text field */
+              navigator.clipboard.writeText("<?php echo $Enroll_Code; ?>");
+              /* Alert the copied text */
+              alert("Copied the text: " + "<?php echo $Enroll_Code; ?>");
+              }
+            
+            </script>
+          </div>
 
                 <div class="form-group">
 					<label for="Course_Name">ชื่อ Course </label>
@@ -218,12 +235,27 @@ function confirmation(){
            
             
           <!-- popupมั่นใจไหมว่าจะลบ --><button  type="button" name="del_course" class="btn btn-danger w-10" data-toggle="modal" data-target="#del_course">ลบ</button>
-					
-          <?php if($Start_date <= date('Y-m-d') and date('Y-m-d') <= $End_date){ ?>
+         
+          <?php
+          // check ว่าcourse ปิดแล้วไม่แสดงปุ่ม ปิด course 
+                   $sqlCourseDate = "SELECT * FROM course WHERE course_ID = ".$Course_ID."";
+                   $sqlCourseDate_q = mysqli_query($connect,$sqlCourseDate);
+                    $sqlCourseDate_result = mysqli_fetch_array($sqlCourseDate_q);
+                    $Course_Start_date = $sqlCourseDate_result['Start_date'];
+                    $Course_End_date = $sqlCourseDate_result['End_date'];
+                     $toDay = date('Y-m-d');
+
+                  if($Course_Start_date <= $toDay and $Course_End_date >= $toDay){
+                        $course_status = 'Open';
+                        ?>
           <!-- popมั่นใจไหมที่จะปิดคอร์ส --><button  type="button" name="end_course" class="btn btn-secondary w-10" data-toggle="modal" data-target="#end_course">ปิด Course</button>        
-          <?php } else{?>
-          <!-- popมั่นใจไหมที่จะgปิดคอร์ส --><button  type="button" name="start_course" class="btn btn-success w-10" data-toggle="modal" data-target="#start_course">เปิด Course</button>        
-           <?php } ?>
+          <?php
+                    
+                    }elseif($Course_End_date <= $toDay ){
+                        $course_status = "Close";
+                    }
+                    ?>
+           
         
 					<button type="submit" id="submit" name="submit" class="btn btn-warning w-25 float-right ml-2 " data-toggle="modal" data-target="#exampleModal">บันทึก</button> 
           <button  onclick="document.location='Course.php?Course_ID=<?=$Course_ID?>'" type="button"  name="cancel" class="btn btn-dark w-25 float-right ml-2">ยกเลิก</button>
@@ -252,7 +284,13 @@ function confirmation(){
       </div>
       
         <?php }else{?>
-            <h1 class="mb-2 text-dark">แสดงข้อมูลห้องเรียน</h1>
+        <div class="row mb-2" style="text-decoration: underline; text-decoration-color: #FF8540;-webkit-text-decoration-color:#FF8540;text-decoration-thickness: 4px;">
+          <div class="col mt-2">
+        <h1 class="mb-2 text-dark">แสดงข้อมูลห้องเรียน<i class="fa fa-book ml-2"></i></h1>
+
+          </div><!-- /.col -->         
+        </div>
+      </div>
 			</div>
 
 
@@ -280,8 +318,19 @@ function confirmation(){
 				</div>
 
                 <div class="form-group">
-					<label>Enroll_Code</label>
-					<label><h1><?php echo $Enroll_Code; ?></h1></label>
+					<label>Enroll_Code : </label>
+					<label class="badge bg-warning" id="copyenrollcode" ><h1><?php echo $Enroll_Code; ?></h1></label>
+           
+
+            <script>
+              copyenrollcode.onclick = function () {
+              /* Copy the text inside the text field */
+              navigator.clipboard.writeText("<?php echo $Enroll_Code; ?>");
+              /* Alert the copied text */
+              alert("Copied the text: " + "<?php echo $Enroll_Code; ?>");
+              }
+            
+            </script>
 				</div>
 
                 <div class="form-group">
@@ -385,31 +434,9 @@ function confirmation(){
                 </div>
                 <div class="modal-footer">
                   <!-- แก้ปุ่มใน modal-->
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                   <button onclick="document.location='close_course_process.php?Course_ID=<?=$Course_ID?>'" type="button" class="btn btn-warning">ยืนยัน</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-          <!-- moal start course -->
-          <div class="modal fade" id="start_course" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLongTitle">แจ้งเตือนการปิดห้องเรียน</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <h5>คุณแน่ใจจะเปิด course นี้</h5>
-                </div>
-                <div class="modal-footer">
-                  <!-- แก้ปุ่มใน modal-->
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button onclick="document.location='open_course_process.php?Course_ID=<?=$Course_ID?>'" type="button" class="btn btn-success">ยืนยัน</button>
                 </div>
               </div>
             </div>
